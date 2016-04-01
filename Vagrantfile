@@ -11,12 +11,14 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "nostromo"
 
   # Message shown on vagrant up
-  #config.vm.post_up_message = ""
+  config.vm.post_up_message = ""
 
   # Assign a static IP to the guest
   #config.vm.network "private_network", ip: "192.168.1.10"
   # Create a forwarded port mapping
   #config.vm.network "forwarded_port", guest: 80, host: 8080
+
+
 
   # Force not-using rsync, so it can fallback to virtualbox sync folders
   # https://superuser.com/questions/1022926/how-to-script-install-of-virtualbox-guest-additions-to-a-vagrant-debian-box/1025183#1025183
@@ -43,6 +45,8 @@ Vagrant.configure(2) do |config|
     #vb.gui = true
   end
 
+
+
   # fix annoyance, http://foo-o-rama.com/vagrant--stdin-is-not-a-tty--fix.html
   config.vm.provision "fix-no-tty", type: "shell" do |s|
     s.privileged = false
@@ -52,12 +56,16 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /root/.profile"
   config.vm.provision "shell", inline: "for user in /home/*; do echo 'export DEBIAN_FRONTEND=noninteractive' >> $user/.profile; done"
 
+
+
   config.vm.provision "shell", path: "provision/00_base.sh"
   config.vm.provision "shell", path: "provision/01_updates.sh"
   # uncomment this line if you want X11 i3:
   #config.vm.provision "shell", path: "provision/02_x11.sh"
   config.vm.provision "shell", path: "provision/10_virtualbox.sh"
   config.vm.provision "shell", path: "provision/20_packages.sh"
+
+
 
   ## provisioning using Ansible
   #config.vm.provision "ansible" do |ansible|
