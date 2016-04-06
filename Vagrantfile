@@ -64,6 +64,7 @@ Vagrant.configure(2) do |config|
   #config.vm.provision "shell", path: "provision/02_x11.sh"
   config.vm.provision "shell", path: "provision/10_virtualbox.sh"
   config.vm.provision "shell", path: "provision/20_packages.sh"
+  config.vm.provision "shell", path: "provision/90_cleanup.sh"
 
 
 
