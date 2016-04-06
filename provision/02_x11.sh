@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# lightweight and fast window manager
+# lightweight and fast tiling window manager
 apt-get install -y i3
 
