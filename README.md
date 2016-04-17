@@ -1,6 +1,6 @@
 # About
 
-VirtualBox guest tools make file syncing easy. However official Debian images don't include them since they're on the contrib repos.
+VirtualBox guest tools make file syncing and networking easy. However official Debian images don't include them since they're on the contrib repos.
 
 So to get things running smoothly some manual intervention is required:
 1. comment any `config.vm.provision "shell", path: "provision/` lines that are not relevant to your interests. In most cases this would boil down to either including or not including `.../02_x11.sh`
@@ -12,4 +12,6 @@ So to get things running smoothly some manual intervention is required:
 
 To avoid having to do this (and waiting 10+ minutes) every time, then package the box:
 `vagrant package --output Debian8_w_VirtualBox_guest_tools.box`
+
+
 

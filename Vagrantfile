@@ -68,6 +68,7 @@ Vagrant.configure(2) do |config|
 
 
 
+  # ignore this section
   ## provisioning using Ansible
   #config.vm.provision "ansible" do |ansible|
   #  ansible.playbook = "example.yml"
