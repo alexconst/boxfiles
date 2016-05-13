@@ -10,8 +10,17 @@ So to get things running smoothly some manual intervention is required:
 1. eventually uncomment or add any `config.vm.network` lines of interest
 1. run `vagrant reload` (equivalent to `vagrant halt ; vagrant up`)
 
-To avoid having to do this (and waiting 10+ minutes) every time, then package the box:
-`vagrant package --output Debian8_w_VirtualBox_guest_tools.box`
+To avoid having to do this (and waiting 10+ minutes) every time:
+```bash
+# package the box:
+boxname="Debian8_w_VirtualBox_guest_tools.box"
+vagrant package --output $boxname
+# add it to your image pool:
+vagrant box add $boxname
+# and update the Vagrantfile to use the new image the next time:
+sed -i.BAK 's/\(\s*config\.vm\.box\s*=\).*/\1 "'$boxname'"/g  ;  s/\(\s*\)\(config\.vm\.provision.*\)/\1#\2/g' Vagrantfile
+```
+The next time you want to start a new environemnt, as always, simply `vagrant up`.
 
 
 
