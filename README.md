@@ -4,11 +4,11 @@ VirtualBox guest tools make file syncing and networking easy. However official D
 So to get things running smoothly some manual intervention is required.
 
 **To build a new box from scratch:**
-1. `rm Vagrantfile ; mv Vagrantfile{.BAK,}`
-1. comment any `config.vm.provision "shell", path: "provision/` lines that are not relevant to your interests. In most cases this would boil down to either including or not including `.../02_x11.sh`
-1. comment the `config.vm.synced_folder` line blocks (there are two!) in the Vagrantfile
+1. `ln -s Vagrantfile{.BAK,}`
+1. comment any `config.vm.provision "shell", path: "provision/` lines that are not relevant to your interests. In most cases this would boil down to either including or not including `.../02_x11.sh` (tip: if you're using X then you may want to uncomment `vb.gui = true`)
+1. comment the `config.vm.synced_folder` line blocks (there are two!) in the Vagrantfile *and* uncomment the line that disables the `/vagrant` share
 1. run `vagrant up`
-1. uncomment the `config.vm.synced_folder` line blocks
+1. uncomment the `config.vm.synced_folder` line blocks *and* comment the line that was disabling the `/vagrant` share
 1. eventually uncomment or add any `config.vm.network` lines of interest
 1. run `vagrant reload` (equivalent to `vagrant halt ; vagrant up`)
 
@@ -20,9 +20,8 @@ boxname="Debian8_w_VirtualBox_guest_tools"
 vagrant package --output "${boxname}.box"
 # add it to your image pool:
 vagrant box add "${boxname}.box" --name "${boxname}"
-# and update the Vagrantfile to use the new image the next time:
-#sed -i.BAK 's/\(\s*config\.vm\.box\s*=\).*/\1 "'$boxname'"/g  ;  s/\(\s*\)\(config\.vm\.provision.*\)/\1#\2/g' Vagrantfile
-# NOTE: the above sed command doesn't work due to multiline commands *shrugs*, just use the provided Vagrantfile
+# and update the Vagrantfile to use the new image the next time, or just use the existing file:
+ln -sf Vagrantfile{.BOX,}
 ```
 
 

@@ -24,5 +24,6 @@ apt-get -y clean
 apt-get -y autoremove
 
 # get this folder out of the way since we'll be using vbox share instead of rsync
-mv /vagrant /vagrant_rsync___can_be_deleted
+#mv /vagrant /vagrant_rsync___can_be_deleted
+# no longer needed because we disable the vagrant share
 
