@@ -4,14 +4,13 @@
 apt-get install -y vim-nox htop tree ncdu
 apt-get install -y tmux byobu ccze --no-install-recommends
 
-# pimp my environment
+# optimize environment
 apt-get install -y zsh
 sed -i.BAK 's#/bin/bash#/usr/bin/zsh#g' /etc/passwd
 apt-get install -y git
-
-# dotfiles
 apt-get install -y stow --no-install-recommends
-# TODO
+apt-get install -y msort --no-install-recommends
+
 
 
 # developer things
