@@ -21,7 +21,8 @@ vagrant package --output "${boxname}.box"
 # add it to your image pool:
 vagrant box add "${boxname}.box" --name "${boxname}"
 # and update the Vagrantfile to use the new image the next time:
-sed -i.BAK 's/\(\s*config\.vm\.box\s*=\).*/\1 "'$boxname'"/g  ;  s/\(\s*\)\(config\.vm\.provision.*\)/\1#\2/g' Vagrantfile
+#sed -i.BAK 's/\(\s*config\.vm\.box\s*=\).*/\1 "'$boxname'"/g  ;  s/\(\s*\)\(config\.vm\.provision.*\)/\1#\2/g' Vagrantfile
+# NOTE: the above sed command doesn't work due to multiline commands *shrugs*, just use the provided Vagrantfile
 ```
 
 

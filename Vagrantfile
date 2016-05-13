@@ -5,7 +5,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "Debian8_w_VirtualBox_guest_tools"
   # Ubuntu comes with the VBox guest tools already installed
-  #config.vm.box = "Debian8_w_VirtualBox_guest_tools"
+  #config.vm.box = "ubuntu/wily64"
 
   # Set up hostname
   config.vm.hostname = "nostromo"
@@ -49,9 +49,9 @@ Vagrant.configure(2) do |config|
 
   # fix annoyance, http://foo-o-rama.com/vagrant--stdin-is-not-a-tty--fix.html
   #config.vm.provision "fix-no-tty", type: "shell" do |s|
-    s.privileged = false
-    s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
-  end
+  #  s.privileged = false
+  #  s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
+  #end
   # fix annoyance, http://serverfault.com/questions/500764/dpkg-reconfigure-unable-to-re-open-stdin-no-file-or-directory
   #config.vm.provision "shell", inline: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /root/.profile"
   #config.vm.provision "shell", inline: "for user in /home/*; do echo 'export DEBIAN_FRONTEND=noninteractive' >> $user/.profile; done"
