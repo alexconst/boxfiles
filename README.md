@@ -28,3 +28,8 @@ ln -sf Vagrantfile{.BOX,}
 **The use the new box:**
 The next time you want to start a new environemnt, as always, simply `vagrant up`.
 
+
+# TODO
+
+- Fix Vagrant.BOX/BAK file duplication. Simply use a ruby variable, eg `using_own_image = true`, to switch modes!
+
