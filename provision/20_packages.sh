@@ -10,7 +10,7 @@ sed -i.BAK 's#/bin/bash#/usr/bin/zsh#g' /etc/passwd
 apt-get install -y git
 
 # dotfiles
-apt-get install -y vcsh mr myrepos ack-grep
+apt-get install -y stow --no-install-recommends
 # TODO
 
 
