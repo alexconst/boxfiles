@@ -3,9 +3,9 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "Debian8_w_VirtualBox_guest_tools"
+  config.vm.box = "debian/jessie64"
   # Ubuntu comes with the VBox guest tools already installed
-  #config.vm.box = "Debian8_w_VirtualBox_guest_tools"
+  #config.vm.box = "ubuntu/wily64"
 
   # Set up hostname
   config.vm.hostname = "nostromo"
@@ -48,29 +48,29 @@ Vagrant.configure(2) do |config|
 
 
   # fix annoyance, http://foo-o-rama.com/vagrant--stdin-is-not-a-tty--fix.html
-  #config.vm.provision "fix-no-tty", type: "shell" do |s|
+  config.vm.provision "fix-no-tty", type: "shell" do |s|
     s.privileged = false
     s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
   end
   # fix annoyance, http://serverfault.com/questions/500764/dpkg-reconfigure-unable-to-re-open-stdin-no-file-or-directory
-  #config.vm.provision "shell", inline: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /root/.profile"
-  #config.vm.provision "shell", inline: "for user in /home/*; do echo 'export DEBIAN_FRONTEND=noninteractive' >> $user/.profile; done"
+  config.vm.provision "shell", inline: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /root/.profile"
+  config.vm.provision "shell", inline: "for user in /home/*; do echo 'export DEBIAN_FRONTEND=noninteractive' >> $user/.profile; done"
 
 
 
-  #config.vm.provision "shell", path: "provision/00_base.sh"
-  #config.vm.provision "shell", path: "provision/01_updates.sh"
+  config.vm.provision "shell", path: "provision/00_base.sh"
+  config.vm.provision "shell", path: "provision/01_updates.sh"
   # uncomment this line if you want X11 i3:
-  ##config.vm.provision "shell", path: "provision/02_x11.sh"
-  #config.vm.provision "shell", path: "provision/10_virtualbox.sh"
-  #config.vm.provision "shell", path: "provision/20_packages.sh"
-  #config.vm.provision "shell", path: "provision/90_cleanup.sh"
+  #config.vm.provision "shell", path: "provision/02_x11.sh"
+  config.vm.provision "shell", path: "provision/10_virtualbox.sh"
+  config.vm.provision "shell", path: "provision/20_packages.sh"
+  config.vm.provision "shell", path: "provision/90_cleanup.sh"
 
 
 
   # ignore this section
   ## provisioning using Ansible
-  ##config.vm.provision "ansible" do |ansible|
+  #config.vm.provision "ansible" do |ansible|
   #  ansible.playbook = "example.yml"
   #  ansible.inventory_path = "example.ini"
   #  # when using an inventory file, the path to the private key must also be specified
