@@ -4,6 +4,7 @@ VirtualBox guest tools make file syncing and networking easy. However official D
 So to get things running smoothly some manual intervention is required.
 
 **To build a new box from scratch:**
+
 1. `ln -s Vagrantfile{.BAK,}`
 1. comment any `config.vm.provision "shell", path: "provision/` lines that are not relevant to your interests. In most cases this would boil down to either including or not including `.../02_x11.sh` (tip: if you're using X then you may want to uncomment `vb.gui = true`)
 1. comment the `config.vm.synced_folder` line blocks (there are two!) in the Vagrantfile *and* uncomment the line that disables the `/vagrant` share
@@ -14,6 +15,7 @@ So to get things running smoothly some manual intervention is required.
 
 
 **To avoid having to do this (and waiting 10+ minutes) every time:**
+
 ```bash
 # package the box:
 boxname="Debian8_w_VirtualBox_guest_tools"
@@ -26,6 +28,7 @@ ln -sf Vagrantfile{.BOX,}
 
 
 **The use the new box:**
+
 The next time you want to start a new environemnt, as always, simply `vagrant up`.
 
 
