@@ -6,7 +6,7 @@ VirtualBox guest tools make file syncing and networking easy. However official D
 So to get things running smoothly we need to do some work.
 
 
-**Step 1: create a new box**
+**Step 1: start a new environment**
 
 This will execute the provisioning scripts which will install the VirtualBox tools and allow for shared folders and networking.
 
@@ -19,7 +19,7 @@ If you want to use the environment right away, with network and shared folders, 
 1. run `BOX="dummy" vagrant reload` (equivalent to `vagrant halt ; BOX="dummy" vagrant up`)
 
 
-**Step 2: package the environment**
+**Step 2: package it into a box**
 
 This will avoid having to wait 10+ minutes for the the provisioning to finish each time you do `vagrant up`.
 So after doing the steps above, do the following:
