@@ -1,20 +1,27 @@
 # About
 
+*Vagrantfile for creating a Debian box with VirtualBox guest tools installed.*
+
 VirtualBox guest tools make file syncing and networking easy. However official Debian images don't include them since they're on the contrib repos.
-So to get things running smoothly some manual intervention is required.
+So to get things running smoothly we need to do some work.
 
-**To build a new box from scratch:**
 
-1. `ln -s Vagrantfile{.BAK,}`
-1. comment any `config.vm.provision "shell", path: "provision/` lines that are not relevant to your interests. In most cases this would boil down to either including or not including `.../02_x11.sh` (tip: if you're using X then you may want to uncomment `vb.gui = true`)
-1. comment the `config.vm.synced_folder` line blocks (there are two!) in the Vagrantfile *and* uncomment the line that disables the `/vagrant` share
+**Step 1: create a new box:**
+
+This will execute the provisioning scripts which will install the VirtualBox tools and allow for shared folders and networking.
+
+1. optionally comment any `config.vm.provision "shell", path: "provision/` lines that are not relevant to your interests. In most cases this would boil down to either including or not including `.../02_x11.sh` (tip: if you're using X then you may want to uncomment `vb.gui = true`)
 1. run `vagrant up`
-1. uncomment the `config.vm.synced_folder` line blocks *and* comment the line that was disabling the `/vagrant` share
-1. eventually uncomment or add any `config.vm.network` lines of interest
-1. run `vagrant reload` (equivalent to `vagrant halt ; vagrant up`)
+
+If you want to use the environment right away, with network and shared folders, before saving the box:
+1. eventually tweak the `config.vm.network` and `config.vm.synced_folder` lines of interest
+1. run `BOX="dummy" vagrant reload` (equivalent to `vagrant halt ; BOX="dummy" vagrant up`)
 
 
-**To avoid having to do this (and waiting 10+ minutes) every time:**
+**Step 2: package the environment:**
+
+This will avoid having to wait 10+ minutes for the the provisioning to finish each time you do `vagrant up`.
+So after doing the steps above, do the following:
 
 ```bash
 # package the box:
@@ -22,17 +29,13 @@ boxname="Debian8_w_VirtualBox_guest_tools"
 vagrant package --output "${boxname}.box"
 # add it to your image pool:
 vagrant box add "${boxname}.box" --name "${boxname}"
-# and update the Vagrantfile to use the new image the next time, or just use the existing file:
-ln -sf Vagrantfile{.BOX,}
+# save the boxname so that Vagrantfile will read from it
+echo "${boxname}" > box
 ```
 
 
-**The use the new box:**
+**Step 3: use the new box that was already provisioned:**
 
-The next time you want to start a new environemnt, as always, simply `vagrant up`.
+From now on simply `vagrant up`.
 
-
-# TODO
-
-- Fix Vagrant.BOX/BAK file duplication. Simply use a ruby variable, eg `using_own_image = true`, to switch modes!
 
