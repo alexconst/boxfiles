@@ -8,7 +8,7 @@ apt-get install -y tmux byobu ccze --no-install-recommends
 apt-get install -y zsh
 sed -i.BAK 's#/bin/bash#/usr/bin/zsh#g' /etc/passwd
 apt-get install -y git
-apt-get install -y ack --no-install-recommends
+apt-get install -y ack silversearcher-ag --no-install-recommends
 apt-get install -y stow --no-install-recommends
 apt-get install -y msort --no-install-recommends
 
